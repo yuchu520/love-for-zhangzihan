@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>永恒的誓言 - 致张子涵</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #5a2a38;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff3e6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat;
+            background-size: contain;
+            opacity: 0.7;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(163, 37, 84, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            color: #8a0f3c;
+            text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #b51d52;
+            font-family: 'Ma Shan Zheng', cursive;
+            margin-bottom: 30px;
+        }
+        
+        .hero-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .photo-gallery {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(138, 15, 60, 0.3);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #8a0f3c;
+            margin-bottom: 25px;
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+        }
+        
+        .gallery-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            border-radius: 3px;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 3/4;
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 255, 255, 0.7);
+        }
+        
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(138, 15, 60, 0.4);
+            z-index: 2;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(138, 15, 60, 0.8), transparent);
+            color: white;
+            padding: 15px 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .photo-item:hover .photo-caption {
+            opacity: 1;
+        }
+        
+        .poetry {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(138, 15, 60, 0.3);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .poetry h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8a0f3c;
+            margin-bottom: 30px;
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+        }
+        
+        .poetry h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            border-radius: 3px;
+        }
+        
+        .poem {
+            font-size: 1.4rem;
+            line-height: 2.2;
+            text-align: center;
+            font-family: 'Ma Shan Zheng', cursive;
+            color: #5a2a38;
+        }
+        
+        .poem p {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .poem p::before {
+            content: "“";
+            position: absolute;
+            left: -25px;
+            top: -15px;
+            font-size: 3rem;
+            color: rgba(181, 29, 82, 0.3);
+        }
+        
+        .vows-section {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 35px rgba(138, 15, 60, 0.3);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .vows-section h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #8a0f3c;
+            margin-bottom: 40px;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .vow {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+            transform: rotate(-1deg);
+            transition: all 0.3s ease;
+        }
+        
+        .vow:nth-child(even) {
+            transform: rotate(1deg);
+        }
+        
+        .vow::before {
+            content: "✧";
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            color: #b51d52;
+        }
+        
+        .vow::after {
+            content: "✧";
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: #b51d52;
+        }
+        
+        /* 纪念日区域 */
+        .anniversary-section {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffafbd);
+            border-radius: 20px;
+            padding: 50px 30px;
+            margin-bottom: 60px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(138, 15, 60, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        .anniversary-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q40,5 60,20 T100,20 Q85,40 100,60 T100,100 Q60,85 60,100 T20,100 Q5,85 20,60 T20,20 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 150px;
+            opacity: 0.3;
+        }
+        
+        .anniversary-title {
+            font-size: 3.2rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(138, 15, 60, 0.7);
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .date-display {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .lunar-date {
+            font-size: 1.8rem;
+            color: #f8f8f8;
+            margin-bottom: 40px;
+            font-family: 'Ma Shan Zheng', cursive;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blessing {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            color: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .memory-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .memory-card {
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(138, 15, 60, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.03);
+        }
+        
+        .memory-card i {
+            font-size: 3.5rem;
+            color: #b51d52;
+            margin-bottom: 20px;
+        }
+        
+        .memory-card h3 {
+            font-size: 1.8rem;
+            color: #8a0f3c;
+            margin-bottom: 15px;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .memory-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #5a2a38;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(163, 37, 84, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .signature {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            color: #8a0f3c;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        }
+        
+        .date {
+            font-size: 1.2rem;
+            color: #b51d52;
+            margin-top: 10px;
+        }
+        
+        /* 花瓣飘落效果 */
+        .petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .petal {
+            position: absolute;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffb6c1"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/><circle cx="8.5" cy="10.5" r="1.5"/><circle cx="15.5" cy="10.5" r="1.5"/><path d="M12 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>') no-repeat;
+            background-size: contain;
+            width: 30px;
+            height: 30px;
+            opacity: 0.8;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .poem, .vow {
+                font-size: 1.2rem;
+            }
+            
+            .vows-section, .poetry {
+                padding: 30px 20px;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .anniversary-title {
+                font-size: 2.5rem;
+            }
+            
+            .date-display {
+                font-size: 2rem;
+            }
+            
+            .lunar-date {
+                font-size: 1.5rem;
+            }
+            
+            .blessing {
+                font-size: 1.4rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 飘落的心形 -->
+    <div class="hearts" id="hearts"></div>
+    
+    <!-- 飘落的花瓣 -->
+    <div class="petals" id="petals"></div>
+    
+    <div class="container">
+        <header>
+            <h1>致张子涵</h1>
+            <div class="subtitle">我心永恒，爱意永存</div>
+            <p>在时间的河流中，你是我唯一的港湾</p>
+        </header>
+        
+        <section class="hero-section">
+            <div class="photo-gallery">
+                <h2 class="gallery-title">最美的瞬间</h2>
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <img src="https://imgur.la/images/2025/06/27/1000002061.jpg" alt="张子涵的照片">
+                        <div class="photo-caption">如花绽放</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://imgur.la/images/2025/06/27/1000002065.jpg" alt="张子涵的照片">
+                        <div class="photo-caption">优雅如诗</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://imgur.la/images/2025/06/27/1000002066.jpg" alt="张子涵的照片">
+                        <div class="photo-caption">明媚动人</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://imgur.la/images/2025/06/27/1000002071.jpg" alt="张子涵的照片">
+                        <div class="photo-caption">温柔如月</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="poetry">
+                <h2>为你而作</h2>
+                <div class="poem">
+                    <p>初见如画映心田，子涵笑靥胜春烟</p>
+                    <p>眼眸流转星河动，倩影摇曳梦中仙</p>
+                    <p>朝暮相思情难尽，四季轮回爱愈坚</p>
+                    <p>执手共赏人间景，白首不离永相牵</p>
+                    <p>岁月长河情为舟，风雨同舟爱作帆</p>
+                    <p>此生愿为双飞翼，比翼连枝共翩跹</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="vows-section">
+            <h2>爱的誓言</h2>
+            <div class="vow">我愿化作春风，轻抚你的发梢；我愿成为星辰，照亮你的夜晚</div>
+            <div class="vow">从青丝到白发，从晨曦到暮霭，我的爱将如初见般炽热</div>
+            <div class="vow">你的笑容是我生命的阳光，你的眼眸是我灵魂的归宿</div>
+            <div class="vow">纵使岁月流转，容颜变迁，我仍会如初识那般，为你心动千千万万遍</div>
+            <div class="vow">让日月见证，让天地为凭，此生此世，唯你一人</div>
+        </section>
+        
+        <!-- 恋爱纪念日区域 -->
+        <section class="anniversary-section">
+            <h2 class="anniversary-title">恋爱纪念日</h2>
+            <div class="date-display">2025年6月27日</div>
+            <div class="lunar-date">农历乙巳年六月初三</div>
+            <div class="blessing">
+                从相遇的那天起，每一天都是爱的纪念。<br>
+                愿我们的爱情如美酒，越陈越香；<br>
+                如星辰，永恒璀璨；<br>
+                如春风，温柔绵长；<br>
+                如夏日，热情似火。<br>
+                纪念日快乐，我的爱人！
+            </div>
+        </section>
+        
+        <section class="memory-section">
+            <div class="memory-card">
+                <i class="fas fa-heart"></i>
+                <h3>初见</h3>
+                <p>那年初夏，阳光正好，你的笑容如花绽放，瞬间点亮了我的整个世界</p>
+            </div>
+            
+            <div class="memory-card">
+                <i class="fas fa-star"></i>
+                <h3>心动</h3>
+                <p>第一次牵手时的悸动，第一次相拥时的温暖，都深深烙印在我的心中</p>
+            </div>
+            
+            <div class="memory-card">
+                <i class="fas fa-moon"></i>
+                <h3>承诺</h3>
+                <p>在星空下许下的誓言，在月光中交换的心意，是我此生不变的承诺</p>
+            </div>
+            
+            <div class="memory-card">
+                <i class="fas fa-infinity"></i>
+                <h3>永恒</h3>
+                <p>无论顺境逆境，无论健康疾病，我的爱将穿越时空，直到永恒</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>愿以余生为笔，以深情为墨，书写我们永恒的篇章</p>
+            <div class="signature">永远爱你的我</div>
+            <div class="date">2025年6月27日</div>
+        </footer>
+    </div>
+
+    <script>
+        // 创建飘落的心形
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${Math.random() * 100}%`;
+            heart.style.opacity = Math.random() * 0.5 + 0.3;
+            heart.style.animation = `floatHeart ${Math.random() * 6 + 8}s infinite ease-in-out`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+            
+            const keyframes = `
+                @keyframes floatHeart {
+                    0% {
+                        transform: translateY(0) rotate(0deg) scale(${Math.random() * 0.5 + 0.5});
+                    }
+                    50% {
+                        transform: translateY(-20px) rotate(${Math.random() > 0.5 ? 20 : -20}deg) scale(${Math.random() * 0.5 + 0.5});
+                    }
+                    100% {
+                        transform: translateY(0) rotate(0deg) scale(${Math.random() * 0.5 + 0.5});
+                    }
+                }
+            `;
+            
+            const style = document.createElement('style');
+            style.innerHTML = keyframes;
+            document.head.appendChild(style);
+            
+            heartsContainer.appendChild(heart);
+        }
+        
+        // 创建飘落的花瓣
+        const petalsContainer = document.getElementById('petals');
+        for (let i = 0; i < 30; i++) {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = `${Math.random() * 100}%`;
+            petal.style.top = `-${Math.random() * 100}px`;
+            petal.style.opacity = Math.random() * 0.6 + 0.2;
+            petal.style.animation = `fall ${Math.random() * 10 + 15}s linear infinite`;
+            petal.style.animationDelay = `${Math.random() * 5}s`;
+            petal.style.transform = `scale(${Math.random() * 0.5 + 0.3})`;
+            
+            const keyframes = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(${Math.random() > 0.5 ? 360 : -360}deg) scale(${Math.random() * 0.5 + 0.3});
+                    }
+                }
+            `;
+            
+            const style = document.createElement('style');
+            style.innerHTML = keyframes;
+            document.head.appendChild(style);
+            
+            petalsContainer.appendChild(petal);
+        }
+        
+        // 添加一些交互效果
+        const vows = document.querySelectorAll('.vow');
+        vows.forEach(vow => {
+            vow.addEventListener('mouseenter', () => {
+                vow.style.background = 'rgba(255, 255, 255, 0.6)';
+                vow.style.transform = 'rotate(0deg) scale(1.05)';
+                vow.style.boxShadow = '0 5px 15px rgba(181, 29, 82, 0.3)';
+            });
+            
+            vow.addEventListener('mouseleave', () => {
+                vow.style.background = 'rgba(255, 255, 255, 0.4)';
+                vow.style.boxShadow = 'none';
+                vow.style.transform = Math.random() > 0.5 ? 'rotate(1deg)' : 'rotate(-1deg)';
+            });
+        });
+        
+        // 添加背景音乐控制
+        const audio = new Audio();
+        audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // 替换为您的音乐链接
+        audio.loop = true;
+        
+        document.body.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("需要用户交互才能播放音频"));
+            }
+        });
+    </script>
+</body>
+</html>
